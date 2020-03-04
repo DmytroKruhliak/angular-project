@@ -1,11 +1,9 @@
 export class User {
     login : string;
     password : string;
-    passwordConf : string;
     email : string;
-    firstname : string;
-    lastname : string;
-    age : string;
+    firstName : string;
+    lastName : string;
     birthday : string;
-    role : string;
+    roleName : string;
 }

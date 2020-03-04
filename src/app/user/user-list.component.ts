@@ -10,25 +10,35 @@ import { UserService } from './user.service';
 export class UserListComponent implements OnInit {
 
   users: User[];
-  user = new User();
+  cuser = new User();
 
-    constructor(private _userService: UserService) {
+  constructor(private _userService: UserService) {
 
-    }
+  }
 
-ngOnInit(): void {
-  this.userList();
-}
+  ngOnInit(): void {
+    this.userList();
+  }
 
-userList() {
-  this._userService.getAllUsers().subscribe(
-    data => this.users = data
-  )
-}
+  userList() {
+    this._userService.getAllUsers().subscribe(
+      data => this.users = data
+    )
+  }
 
-addUser(): void {
-  this._userService.addUser(this.user).subscribe((response) => {console.log(response);
-  })
-}
+  addUser() {
+    console.log(this.cuser);
+    this._userService.addUser(this.cuser).subscribe((response) => {
+      console.log(response);
+      this.userList();
+    })
+  }
+
+  deleteUser(userId: string) {
+    this._userService.deleteUser(userId).subscribe((response) => {
+      console.log(response);
+      this.userList();
+    })
+  }
 
 }

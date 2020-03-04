@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { User } from './user';
 import { Observable } from 'rxjs';
 
@@ -9,17 +9,21 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private baseUrl: string = 'http://10.10.21.199:8888/admin/get';
+  private baseUrlGet: string = 'http://10.10.21.199:8888/admin/get';
+  private baseUrlPost : string = 'http://10.10.21.199:8888/admin/add';
+  private baseUrlDelete : string = 'http://10.10.21.199:8888/admin/kill/';
 
   constructor(private _httpClien: HttpClient) { }
 
   getAllUsers(): Observable<User[]> {
-    return this._httpClien.get<User[]>(this.baseUrl);
+    return this._httpClien.get<User[]>(this.baseUrlGet);
   }
 
   addUser(user: User) {
-    let body = JSON.stringify(user);
-    let headers = new Headers({'Content-Type': 'application/json'});
-    return this._httpClien.post("http://10.10.21.199:8888/admin/add", body);
+       return this._httpClien.post(this.baseUrlPost, user);
   }
+
+  deleteUser(userId: string) {
+      return this._httpClien.delete(this.baseUrlDelete + userId);
+  } 
 }
