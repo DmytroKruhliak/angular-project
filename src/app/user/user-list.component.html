@@ -1,18 +1,24 @@
 <div class="container">
   <h2 align="center">Users Table</h2>
 
+  <div *ngIf = "!logged">
+    <app-login>
+
+    </app-login>
+  </div>
+
+
+
   <div>
     <form>
-      Enter login: <input type="text" [(ngModel)] = "cuser.login" name="login" placeholder="login"> <br>
-      Enter password: <input type="text" [(ngModel)] = "cuser.password" name="password"><br>
-      Enter email: <input type="text" [(ngModel)] = "cuser.email" name="email"><br>
-      Enter firstname: <input type="text" [(ngModel)] = "cuser.firstName" name="firstname"><br>
-      Enter lastname: <input type="text" [(ngModel)] = "cuser.lastName" name="lastname"><br>
-      Enter birthday: <input type="date" [(ngModel)] = "cuser.birthday" name="birthday"><br>
-      Enter role: <input type="text" [(ngModel)] = "cuser.roleName" name="role"><br>
-
-      
-      <button (click) = "addUser()">Add User</button>
+      Enter login: <input type="text" [(ngModel)] = "newUser.login" name="login" placeholder="login"> <br>
+      Enter password: <input type="text" [(ngModel)] = "newUser.password" name="password"><br>
+      Enter email: <input type="text" [(ngModel)] = "newUser.email" name="email"><br>
+      Enter firstname: <input type="text" [(ngModel)] = "newUser.firstName" name="firstname"><br>
+      Enter lastname: <input type="text" [(ngModel)] = "newUser.lastName" name="lastname"><br>
+      Enter birthday: <input type="date" [(ngModel)] = "newUser.birthday" name="birthday"><br>
+      Enter role: <input type="text" [(ngModel)] = "newUser.roleName" name="role"><br>
+      <button class="btn btn-primary" (click) = "addUser()">Add User</button>
     </form>
   </div>
               
@@ -27,10 +33,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td align="center">{{user.id}}</td> 
+        <td>{{user.id}}</td> 
         <td>{{user.login}}</td>
         <td>{{user.email}}</td>
-        <td>EDIT | <button (click)="deleteUser(user.id)">Remove</button></td>
+        <td>EDIT | 
+          <!-- <buttom -->
+          <button (click)="deleteUser(user.id)">Remove</button>
+        </td>
       </tr>
     </tbody>
   </table>

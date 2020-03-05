@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user';
 import { UserService } from './user.service';
+import { LoginForm } from '../login/login-form';
 
 @Component({
   selector: 'app-user-list',
@@ -9,8 +10,9 @@ import { UserService } from './user.service';
 })
 export class UserListComponent implements OnInit {
 
+  logged: boolean = false;
   users: User[];
-  cuser = new User();
+  newUser = new User();
 
   constructor(private _userService: UserService) {
 
@@ -27,18 +29,26 @@ export class UserListComponent implements OnInit {
   }
 
   addUser() {
-    console.log(this.cuser);
-    this._userService.addUser(this.cuser).subscribe((response) => {
+    
+    console.log(this.newUser);
+
+    this._userService.addUser(this.newUser).subscribe((response) => {
       console.log(response);
       this.userList();
     })
   }
 
   deleteUser(userId: string) {
-    this._userService.deleteUser(userId).subscribe((response) => {
-      console.log(response);
-      this.userList();
-    })
+    if (confirm("Delete user with id: " + userId)) {
+      this._userService.deleteUser(userId).subscribe((response) => {
+        console.log(response);
+        this.userList();
+      })
+    }
   }
+
+  public toggleForm() {
+    this.logged = !this.logged;
+ }
 
 }

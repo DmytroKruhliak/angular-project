@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+<div class="container" >
+  <h2>Form control: input</h2>
+  <p>The form below contains two input elements; one of type text and one of type password:</p>
+  <form>
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" class="form-control" [(ngModel)] = "loginForm.login" id="usr" name="login">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" [(ngModel)] = "loginForm.password" id="pwd"  name="password">
+    </div>
+    <button class="btn btn-primary" (click) = "tryToLogIn()">LogIn</button>
+  </form>
+</div>
+
+</body>
+</html>
